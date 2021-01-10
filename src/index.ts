@@ -1,17 +1,9 @@
-import { mqClient } from './lib/mq-client';
-import { SomePublisher } from './pub';
+// re-export necessary types from the original lib
+export { Channel, Message } from 'amqplib/callback_api';
 
-(async function () {
-    await mqClient.connect('amqp://localhost');
-    const publisher = await (
-        await new SomePublisher(mqClient.connection).createChannel()
-    ).assertExchange();
+// export client
+export { mqClient } from './lib/mq-client'
 
-    try {
-        setInterval(() => {
-            publisher.publish('Some text');
-        }, 1000);
-    } catch (e) {
-        console.log(e);
-    }
-})();
+// Export base classes
+export * from './lib/Publisher'
+export * from './lib/Listener'

@@ -9,13 +9,13 @@
   ],
   "scripts": {
     "clean": "del ./build/*",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc --project tsconfig.build.json",
     "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish",
-    "example:client": "ts-node-dev examples/client.ts",
-    "example:server": "ts-node-dev examples/server.ts"
+    "example:client": "ts-node-dev examples/pubsub/client.ts",
+    "example:server": "ts-node-dev examples/pubsub/server.ts"
   },
   "keywords": ["rabbitmq","rabbit","amqplib","rabbitmq client"],
-  "author": "",
+  "author": "Davit Vardanyan",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^14.11.8",

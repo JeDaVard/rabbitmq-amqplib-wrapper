@@ -1,6 +1,4 @@
-import { mqClient } from './lib/mq-client';
-import { Channel, Message } from 'amqplib/callback_api';
-import { Listener } from './lib/Listener';
+import { mqClient, Listener, Channel, Message } from '../../src';
 
 interface SomeEvent {
     exchange: string;

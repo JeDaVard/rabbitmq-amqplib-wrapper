@@ -1,4 +1,4 @@
-import { Publisher } from './lib/Publisher';
+import { Publisher } from '../../src';
 
 interface SomeEvent {
     exchange: string;
