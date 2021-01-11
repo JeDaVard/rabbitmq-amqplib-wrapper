@@ -2,6 +2,8 @@ import { mqClient } from '../../src';
 import { NewOrderListener } from "./events/subscribers/new-order-listener";
 import { UserSignupListener } from "./events/subscribers/user-signup-listener";
 
+const signUpEventLogger = () => { console.log('[user-service] Info about a new user is pushed to MQ') }
+const newOrderEventLogger = () => { console.log('[order-service] Info about a new order is pushed to MQ') }
 
 (async function () {
     await mqClient.connect('amqp://localhost');
@@ -16,8 +18,6 @@ import { UserSignupListener } from "./events/subscribers/user-signup-listener";
         .assertQueue()
     ).bindQueue();
 
-    userSignupListener.listen();
-
     const newOrderListener = (
         await (
             await (
@@ -28,7 +28,8 @@ import { UserSignupListener } from "./events/subscribers/user-signup-listener";
             .assertQueue()
     ).bindQueue();
 
-    newOrderListener.listen();
+    userSignupListener.listen(signUpEventLogger);
+    newOrderListener.listen(newOrderEventLogger);
 
     const gracefulSh = () => {
         userSignupListener.close();

@@ -1,13 +1,20 @@
 export interface UserSignupEvent {
   exchange: string;
   routeKey: string;
-  data: any;
+  data: {
+    id: number,
+    username: string
+  };
 }
 
 export interface NewOrderEvent {
   exchange: string;
   routeKey: string;
-  data: any;
+  data: {
+    id: number;
+    items: string[];
+    userId: number;
+  };
 }
 
 export const orderExchange = 'order_exchange';

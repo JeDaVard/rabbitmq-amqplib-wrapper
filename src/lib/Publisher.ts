@@ -30,7 +30,7 @@ export abstract class Publisher<T extends Event> extends RabbitMQ<T> {
             const pubRes = this.channel.publish(
                 this.exchange,
                 this.routeKey,
-                Buffer.from(data),
+                Buffer.from(JSON.stringify(data)),
                 this.publishOptions
             );
 

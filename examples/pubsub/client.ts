@@ -2,6 +2,10 @@ import { mqClient } from '../../src';
 import { UserSignupPublisher } from './events/publishers/user-signup-publisher';
 import { NewOrderPublisher } from './events/publishers/new-order-publisher';
 
+import { Order, User } from "./dummy-data";
+const signUpPubLogger = () => { console.log('[user-service] Info about a new user is pushed to MQ') }
+const newOrderPubLogger = () => { console.log('[order-service] Info about a new order is pushed to MQ') }
+
 (async function () {
     await mqClient.connect('amqp://localhost');
 
@@ -15,8 +19,8 @@ import { NewOrderPublisher } from './events/publishers/new-order-publisher';
 
     try {
         setInterval(() => {
-            userSignupListener.publish('new user');
-            newOrderPublisher.publish('new order');
+            userSignupListener.publish(new User(), signUpPubLogger);
+            newOrderPublisher.publish(new Order(), newOrderPubLogger);
         }, 2000);
     } catch (e) {
         console.log(e);

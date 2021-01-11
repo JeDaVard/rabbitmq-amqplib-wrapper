@@ -37,7 +37,7 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
         return this;
     }
 
-    listen() {
+    listen(callback?: () => void) {
         if (!this.channel)
             throw new Error(
                 "[ERROR] Listener doesn't have a channel. You must create it first using createChannel async method."
@@ -47,7 +47,8 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
             this.queueName,
             (msg) => {
                 if (!!msg) {
-                    this.onMessage(this.channel!, msg.content.toString(), msg);
+                    if (callback) callback();
+                    this.onMessage(this.channel!, this.parseMessage(msg), msg);
                 }
             },
             {
@@ -56,8 +57,8 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
         );
     }
     parseMessage(msg: Message) {
-        const data = msg.content;
-        return data.toString();
+        const data = msg.content.toString();
+        return JSON.parse(data)
         // return typeof data === 'string' ? JSON.parse(data) : JSON.parse(data.toString('utf8'))
     }
     close() {
