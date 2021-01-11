@@ -20,13 +20,7 @@ export abstract class Publisher<T extends Event> extends RabbitMQ<T> {
     }
 
     publish(data: T['data'], callback?: () => void): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            if (!this.channel) {
-                reject(
-                    '[ERROR] There is no channel, please create before this action.'
-                );
-                return;
-            }
+        return new Promise((resolve) => {
             const pubRes = this.channel.publish(
                 this.exchange,
                 this.routeKey,

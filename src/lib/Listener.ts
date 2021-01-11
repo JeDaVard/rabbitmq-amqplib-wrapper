@@ -20,29 +20,16 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
     }
 
     prefetch(): Listener<T> {
-        if (!this.channel)
-            throw new Error(
-                "[ERROR] Listener doesn't have a channel. You must create it first using createChannel async method."
-            );
         this.channel.prefetch(this.prefetchCount);
         return this;
     }
 
     bindQueue() {
-        if (!this.channel)
-            throw new Error(
-                "[ERROR] Listener doesn't have a channel. You must create it first using createChannel async method."
-            );
         this.channel.bindQueue(this.queueName, this.exchange, this.pattern);
         return this;
     }
 
     listen(callback?: () => void) {
-        if (!this.channel)
-            throw new Error(
-                "[ERROR] Listener doesn't have a channel. You must create it first using createChannel async method."
-            );
-
         this.channel.consume(
             this.queueName,
             (msg) => {
