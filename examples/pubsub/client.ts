@@ -9,7 +9,7 @@ const newOrderPubLogger = () => { console.log('[order-service] Info about a new 
 (async function () {
     await mqClient.connect('amqp://localhost');
 
-    const userSignupListener = await (
+    const userSignupPublisher = await (
         await new UserSignupPublisher(mqClient.connection).createChannel()
     ).assertExchange();
 
@@ -19,10 +19,23 @@ const newOrderPubLogger = () => { console.log('[order-service] Info about a new 
 
     try {
         setInterval(() => {
-            userSignupListener.publish(new User(), signUpPubLogger);
+            userSignupPublisher.publish(new User(), signUpPubLogger);
             newOrderPublisher.publish(new Order(), newOrderPubLogger);
         }, 2000);
     } catch (e) {
         console.log(e);
     }
+
+    const gracefulSh = async () => {
+        try {
+            await userSignupPublisher.close();
+            await newOrderPublisher.close();
+        } catch (e) {
+            console.log(e);
+        }
+        process.exit(0);
+    };
+
+    process.on('SIGINT', gracefulSh);
+    process.on('SIGTERM', gracefulSh);
 })();

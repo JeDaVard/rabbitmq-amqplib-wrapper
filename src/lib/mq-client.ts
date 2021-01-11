@@ -1,4 +1,4 @@
-import { connect, Connection, Options } from 'amqplib/callback_api';
+import { connect, Connection, Options } from 'amqplib';
 
 class MqClient {
     private _connection?: Connection;
@@ -12,20 +12,14 @@ class MqClient {
         return this._connection;
     }
 
-    connect(url: string | Options.Connect, callback?: () => void) {
-        if (this._connection) this._connection.close();
+    async connect(url: string | Options.Connect, callback?: () => void) {
+        if (this._connection) await this._connection.close();
 
-        return new Promise((resolve, reject) => {
-            connect(url, (err, connection) => {
-                if (err) reject(err);
+        this._connection = await connect(url)
 
-                this._connection = connection;
+        if (callback) callback();
 
-                if (callback) callback();
-
-                resolve(this._connection);
-            });
-        });
+        return this._connection
     }
 }
 

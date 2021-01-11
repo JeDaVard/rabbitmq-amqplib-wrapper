@@ -1,4 +1,4 @@
-import { Connection, Message, Channel } from 'amqplib/callback_api';
+import { Connection, Message, Channel } from 'amqplib';
 import { ExchangeType } from './ExchangeType';
 import { RabbitMQ } from './RabbitMQ';
 
@@ -19,23 +19,23 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
         super(connection, exchangeType);
     }
 
-    prefetch(): Listener<T> {
-        this.channel.prefetch(this.prefetchCount);
+    async prefetch(): Promise<this> {
+        await this.channel.prefetch(this.prefetchCount);
         return this;
     }
 
-    bindQueue() {
-        this.channel.bindQueue(this.queueName, this.exchange, this.pattern);
+    async bindQueue(): Promise<this> {
+        await this.channel.bindQueue(this.queueName, this.exchange, this.pattern);
         return this;
     }
 
-    listen(callback?: () => void) {
-        this.channel.consume(
+    async listen(callback?: () => void) {
+        await this.channel.consume(
             this.queueName,
             (msg) => {
                 if (!!msg) {
                     if (callback) callback();
-                    this.onMessage(this.channel!, this.parseMessage(msg), msg);
+                    this.onMessage(this.channel, this.parseMessage(msg), msg);
                 }
             },
             {
@@ -43,13 +43,15 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
             }
         );
     }
+
     parseMessage(msg: Message) {
         const data = msg.content.toString();
         return JSON.parse(data)
         // return typeof data === 'string' ? JSON.parse(data) : JSON.parse(data.toString('utf8'))
     }
-    close() {
+
+    async close() {
         // You can write here other clean-ups
-        this.connection.close();
+        await this.connection.close();
     }
 }

@@ -1,4 +1,4 @@
-import { Connection, Options } from 'amqplib/callback_api';
+import { Connection, Options } from 'amqplib';
 import { RabbitMQ } from './RabbitMQ';
 import { ExchangeType } from './ExchangeType';
 
@@ -19,26 +19,23 @@ export abstract class Publisher<T extends Event> extends RabbitMQ<T> {
         super(connection, exchangeType);
     }
 
-    publish(data: T['data'], callback?: () => void): Promise<boolean> {
-        return new Promise((resolve) => {
-            const pubRes = this.channel.publish(
+    async publish(data: T['data'], callback?: () => void): Promise<boolean> {
+            const res = this.channel.publish(
                 this.exchange,
                 this.routeKey,
                 Buffer.from(JSON.stringify(data)),
                 this.publishOptions
             );
 
-            if (pubRes && callback) {
+            if (res && callback) {
                 callback();
-                resolve(true);
-                return;
             }
-            resolve(false);
-        });
+
+            return res;
     }
 
-    close() {
+    async close() {
         // You can write here other clean-ups
-        this.connection.close();
+        await this.connection.close();
     }
 }

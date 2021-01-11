@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6bd360d0-451a-4b1f-96f1-52f1992e1b32" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/pubsub/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/examples/pubsub/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/pubsub/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/examples/pubsub/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Listener.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Listener.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Publisher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Publisher.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/RabbitMQ.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/RabbitMQ.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/mq-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/mq-client.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610314750033</updated>
-      <workItem from="1610314751235" duration="18686000" />
+      <workItem from="1610314751235" duration="21115000" />
     </task>
     <servers />
   </component>
