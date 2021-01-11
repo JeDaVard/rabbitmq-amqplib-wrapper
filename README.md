@@ -8,7 +8,7 @@ RabbitMQ is the most popular of its kind, because it's very fast and relatively 
 
 ### Description
 I created this library to make rabbitMQ easy to integrate in Node.js microservice architecture by providing static type support, maintainable and extensible interfaces, and better developer experience.
-This library itself is in an alpha condition, for advanced cases it requires to be extended by taking into account the rabbitMQ gotchas, but this is a modern library written in TypeScript OOP principals in mind, in a compare of an advanced and mature [Rascal](https://www.npmjs.com/package/rascal) wrapper.
+This library itself is in alpha condition, for advanced cases it requires to be extended by taking into account the rabbitMQ gotchas, but this is a modern library written in TypeScript OOP principals in mind, in a compare of an advanced and mature [Rascal](https://www.npmjs.com/package/rascal) wrapper.
 
 ### How to run the example
 0. Make sure you have [Docker desktop]('https://www.docker.com/products/docker-desktop') up and running
