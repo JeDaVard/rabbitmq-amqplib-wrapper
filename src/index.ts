@@ -1,5 +1,5 @@
 // re-export necessary types from the original lib
-export { Channel, Message } from 'amqplib/callback_api';
+export { Channel, Message, Options } from 'amqplib/callback_api';
 
 // export client
 export { mqClient } from './lib/mq-client'

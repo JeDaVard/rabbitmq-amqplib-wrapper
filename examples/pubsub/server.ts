@@ -1,36 +1,38 @@
-import { mqClient, Listener, Channel, Message } from '../../src';
+import { mqClient } from '../../src';
+import { NewOrderListener } from "./events/subscribers/new-order-listener";
+import { UserSignupListener } from "./events/subscribers/user-signup-listener";
 
-interface SomeEvent {
-    exchange: string;
-    routeKey: string;
-    data: any;
-}
 
 (async function () {
     await mqClient.connect('amqp://localhost');
 
-    class Lis extends Listener<SomeEvent> {
-        onMessage(channel: Channel, data: any, msg: Message) {
-            console.log(data);
-            channel.ack(msg);
-        }
-        exchange = 'someExchange';
-    }
+    const userSignupListener = (
+      await (
+        await (
+          await new UserSignupListener(mqClient.connection).createChannel()
+        ).assertExchange()
+      )
+        .prefetch()
+        .assertQueue()
+    ).bindQueue();
 
-    const listener = (
+    userSignupListener.listen();
+
+    const newOrderListener = (
         await (
             await (
-                await new Lis(mqClient.connection).createChannel()
+                await new NewOrderListener(mqClient.connection).createChannel()
             ).assertExchange()
         )
             .prefetch()
             .assertQueue()
     ).bindQueue();
 
-    listener.listen();
+    newOrderListener.listen();
 
     const gracefulSh = () => {
-        listener.close();
+        userSignupListener.close();
+        newOrderListener.close();
         process.exit(0);
     };
 

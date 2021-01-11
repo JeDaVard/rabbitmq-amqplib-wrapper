@@ -9,6 +9,8 @@ interface Event {
 
 export abstract class Listener<T extends Event> extends RabbitMQ<T> {
     abstract onMessage(channel: Channel, data: T['data'], msg: Message): void;
+    abstract pattern = '*';
+    protected prefetchCount = 1;
 
     public constructor(
         protected connection: Connection,
@@ -17,21 +19,21 @@ export abstract class Listener<T extends Event> extends RabbitMQ<T> {
         super(connection, exchangeType);
     }
 
-    prefetch(prefetchCount = 1): Listener<T> {
+    prefetch(): Listener<T> {
         if (!this.channel)
             throw new Error(
                 "[ERROR] Listener doesn't have a channel. You must create it first using createChannel async method."
             );
-        this.channel.prefetch(prefetchCount);
+        this.channel.prefetch(this.prefetchCount);
         return this;
     }
 
-    bindQueue(pattern = '*') {
+    bindQueue() {
         if (!this.channel)
             throw new Error(
                 "[ERROR] Listener doesn't have a channel. You must create it first using createChannel async method."
             );
-        this.channel.bindQueue(this.queueName, this.exchange, pattern);
+        this.channel.bindQueue(this.queueName, this.exchange, this.pattern);
         return this;
     }
 

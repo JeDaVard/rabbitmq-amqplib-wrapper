@@ -8,6 +8,7 @@ interface Event {
 
 export abstract class RabbitMQ<T extends Event> {
     abstract exchange: T['exchange'] = '';
+    protected exchangeOptions?: Options.AssertExchange;
     protected queueName = '';
 
     protected constructor(
@@ -28,7 +29,6 @@ export abstract class RabbitMQ<T extends Event> {
     }
 
     assertExchange(
-        exchangeOptions?: Options.AssertExchange,
         callback?: () => void
     ): Promise<this> {
         return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ export abstract class RabbitMQ<T extends Event> {
             this.channel.assertExchange(
                 this.exchange,
                 this.exchangeType || 'fanout',
-                exchangeOptions,
+                this.exchangeOptions,
                 (err, assertExchange) => {
                     if (err) return reject(err);
                     this.exchange = assertExchange.exchange;

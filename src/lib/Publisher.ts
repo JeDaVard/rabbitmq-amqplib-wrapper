@@ -10,6 +10,7 @@ interface Event {
 
 export abstract class Publisher<T extends Event> extends RabbitMQ<T> {
     abstract routeKey: T['routeKey'];
+    protected publishOptions?: Options.Publish;
 
     public constructor(
         protected connection: Connection,
@@ -18,11 +19,7 @@ export abstract class Publisher<T extends Event> extends RabbitMQ<T> {
         super(connection, exchangeType);
     }
 
-    publish(
-        data: T['data'],
-        publishOptions?: Options.Publish,
-        callback?: () => void
-    ): Promise<boolean> {
+    publish(data: T['data'], callback?: () => void): Promise<boolean> {
         return new Promise((resolve, reject) => {
             if (!this.channel) {
                 reject(
@@ -34,7 +31,7 @@ export abstract class Publisher<T extends Event> extends RabbitMQ<T> {
                 this.exchange,
                 this.routeKey,
                 Buffer.from(data),
-                publishOptions
+                this.publishOptions
             );
 
             if (pubRes && callback) {

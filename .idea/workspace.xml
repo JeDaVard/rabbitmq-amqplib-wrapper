@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bd360d0-451a-4b1f-96f1-52f1992e1b32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/pubsub/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/pubsub/events/common-types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/pubsub/events/publishers/new-order-publisher.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/pubsub/events/publishers/user-signup-publisher.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/pubsub/events/subscribers/new-order-listener.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/pubsub/events/subscribers/user-signup-listener.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/pubsub/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/examples/pubsub/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/pubsub/pub.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/pubsub/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/examples/pubsub/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pub.ts" beforeDir="false" afterPath="$PROJECT_DIR$/examples/pubsub/pub.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sub.ts" beforeDir="false" afterPath="$PROJECT_DIR$/examples/pubsub/sub.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Listener.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Listener.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Publisher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Publisher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/RabbitMQ.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/RabbitMQ.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.build.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,12 +62,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610314750033</updated>
-      <workItem from="1610314751235" duration="2300000" />
+      <workItem from="1610314751235" duration="8276000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/lib/ExchangeType.js" />
+        <option value="$PROJECT_DIR$/src/lib/Publisher.js" />
+        <option value="$PROJECT_DIR$/src/lib/Listener.js" />
+        <option value="$PROJECT_DIR$/src/lib/RabbitMQ.js" />
+        <option value="$PROJECT_DIR$/src/lib/mq-client.js" />
+        <option value="$PROJECT_DIR$/examples/pubsub/server.js" />
+        <option value="$PROJECT_DIR$/examples/pubsub/client.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
